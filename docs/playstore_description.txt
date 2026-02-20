@@ -1,0 +1,55 @@
+ExecPrompt is a multi-provider AI chat client built for people who prefer function over friction. Connect to local Ollama, Ollama Cloud, OpenRouter, Anthropic, or OpenAI. All from one interface. No accounts required. Your keys, your control.
+
+<b>Multi-Provider Architecture</b>
+
+Connect to Ollama running on your device or homelab. Add OpenRouter for access to Claude, GPT, Gemini, and hundreds of other models. Use Anthropic or OpenAI APIs directly. Switch between providers and models without changing tools. The app adapts to what you connect.
+
+<b>Full-Text Search</b>
+
+Search across conversation titles and message content. Results show matching snippets. Works across all conversations regardless of provider.
+
+<b>Export Conversations</b>
+
+Export individual conversations as JSON or Markdown. Share via any app. Your data, your format. No lock-in.
+
+<b>Token Usage Tracking</b>
+
+See input, output, and total tokens for each conversation. Supported on OpenRouter, OpenAI, Anthropic, and Ollama endpoints that report usage. In-memory only, resets on app restart.
+
+<b>Reasoning Model Support</b>
+
+Models that output thinking traces (DeepSeek R1, Claude with extended thinking, Gemini Thinking) display their reasoning in a dedicated section. Collapsible, copy-pasteable, never in the way.
+
+<b>Conversation Management</b>
+
+Create, rename, delete, search, and export conversations. Fork a conversation to explore different paths. All stored locally in SQLite. No cloud sync, no telemetry.
+
+<b>Custom Parameters</b>
+
+Temperature, top-p, top-k, max tokens, presence penalty, frequency penalty. Set them or leave defaults. Toggle parameter sending per-request to work around provider quirks.
+
+<b>Web Search Integration</b>
+
+Enable web search for grounded responses. Supports Tavily and Ollama (when using Ollama Cloud). Bring your own API keys. Results include source citations.
+
+<b>Ollama Cloud Access</b>
+
+Direct support for Ollama Cloud models. Configure your Ollama Cloud endpoint alongside local Ollama servers, OpenRouter, Anthropic, and OpenAI. Unified interface across all providers.
+
+<b>Privacy First</b>
+
+Your API keys stay on your device. Encrypted in flutter_secure_storage. No analytics, no crash reporting, no telemetry. The app talks to your configured endpoints and nothing else.
+
+<b>Terminal Aesthetic</b>
+
+No gradients, no rounded corners, no animations for the sake of animations. Monospace everywhere. CyberTerm color palette (green, amber, blue, pink). For those who know.
+
+<b>Who This Is For</b>
+
+Power users who run Ollama locally. Developers switching between Claude, GPT, and local models. People who want export, search, and token tracking without subscriptions. Anyone tired of apps that treat settings like trade secrets.
+
+<b>What This Isn't</b>
+
+Not a beginner-friendly chat interface. Not optimized for casual use. No hand-holding, no tutorials, no gamification. If you need to ask what Ollama is, this probably isn't your app.
+
+Unapologetically geek.
