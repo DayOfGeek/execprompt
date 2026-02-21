@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-
 import 'dart:convert';
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
@@ -65,7 +64,7 @@ class MessageBubble extends StatelessWidget {
     final String tag = isUser ? 'USR' : 'SYS';
     final Color tagColor = isUser ? colors.accent : colors.primary;
     final Color bubbleBg = isError
-        ? colors.error.withValues(alpha: 0.1)
+        ? colors.error.withOpacity(0.1)
         : isUser
             ? colors.userBubble
             : colors.botBubble;
@@ -90,7 +89,8 @@ class MessageBubble extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
               decoration: BoxDecoration(
-                border: Border(bottom: BorderSide(color: borderColor, width: 0.5)),
+                border:
+                    Border(bottom: BorderSide(color: borderColor, width: 0.5)),
               ),
               child: Row(
                 children: [
@@ -199,7 +199,8 @@ class MessageBubble extends StatelessWidget {
                             border: Border.all(color: colors.border),
                             color: colors.surface,
                           ),
-                          child: Icon(Icons.broken_image, color: colors.textDim),
+                          child:
+                              Icon(Icons.broken_image, color: colors.textDim),
                         );
                       }
                     }).toList(),
@@ -237,7 +238,8 @@ class MessageBubble extends StatelessWidget {
                   children: [
                     Text(
                       '> ',
-                      style: mono.copyWith(color: colors.primaryDim, fontSize: 13),
+                      style:
+                          mono.copyWith(color: colors.primaryDim, fontSize: 13),
                     ),
                     BlinkingCursor(color: colors.primary, fontSize: 13),
                   ],
@@ -275,7 +277,8 @@ class MessageBubble extends StatelessWidget {
     );
   }
 
-  void _confirmFork(BuildContext context, CyberTermColors colors, TextStyle mono) {
+  void _confirmFork(
+      BuildContext context, CyberTermColors colors, TextStyle mono) {
     HapticFeedback.mediumImpact();
     showDialog(
       context: context,
@@ -287,7 +290,8 @@ class MessageBubble extends StatelessWidget {
         ),
         title: Text(
           '▸ FORK CONVERSATION',
-          style: mono.copyWith(color: colors.primary, fontSize: 14, fontWeight: FontWeight.bold),
+          style: mono.copyWith(
+              color: colors.primary, fontSize: 14, fontWeight: FontWeight.bold),
         ),
         content: Text(
           'Create a new conversation branching from this message? '
@@ -297,21 +301,24 @@ class MessageBubble extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: Text('[CANCEL]', style: mono.copyWith(color: colors.textDim, fontSize: 11)),
+            child: Text('[CANCEL]',
+                style: mono.copyWith(color: colors.textDim, fontSize: 11)),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(ctx).pop();
               onFork!();
             },
-            child: Text('[FORK]', style: mono.copyWith(color: colors.primary, fontSize: 11)),
+            child: Text('[FORK]',
+                style: mono.copyWith(color: colors.primary, fontSize: 11)),
           ),
         ],
       ),
     );
   }
 
-  void _confirmDelete(BuildContext context, CyberTermColors colors, TextStyle mono) {
+  void _confirmDelete(
+      BuildContext context, CyberTermColors colors, TextStyle mono) {
     HapticFeedback.mediumImpact();
     showDialog(
       context: context,
@@ -323,7 +330,8 @@ class MessageBubble extends StatelessWidget {
         ),
         title: Text(
           '▸ DELETE MESSAGE',
-          style: mono.copyWith(color: colors.error, fontSize: 14, fontWeight: FontWeight.bold),
+          style: mono.copyWith(
+              color: colors.error, fontSize: 14, fontWeight: FontWeight.bold),
         ),
         content: Text(
           'Remove this message from the conversation? This cannot be undone.',
@@ -332,14 +340,16 @@ class MessageBubble extends StatelessWidget {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
-            child: Text('[CANCEL]', style: mono.copyWith(color: colors.textDim, fontSize: 11)),
+            child: Text('[CANCEL]',
+                style: mono.copyWith(color: colors.textDim, fontSize: 11)),
           ),
           TextButton(
             onPressed: () {
               Navigator.of(ctx).pop();
               onDelete!();
             },
-            child: Text('[DELETE]', style: mono.copyWith(color: colors.error, fontSize: 11)),
+            child: Text('[DELETE]',
+                style: mono.copyWith(color: colors.error, fontSize: 11)),
           ),
         ],
       ),
@@ -381,7 +391,16 @@ class _ThinkingSectionState extends State<_ThinkingSection>
 
   // Braille spinner frames for active reasoning
   static const _spinnerFrames = [
-    '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏',
+    '⠋',
+    '⠙',
+    '⠹',
+    '⠸',
+    '⠼',
+    '⠴',
+    '⠦',
+    '⠧',
+    '⠇',
+    '⠏',
   ];
 
   @override
@@ -421,8 +440,7 @@ class _ThinkingSectionState extends State<_ThinkingSection>
   @override
   Widget build(BuildContext context) {
     final spinIdx = widget.isStreaming
-        ? (DateTime.now().millisecondsSinceEpoch ~/ 100) %
-            _spinnerFrames.length
+        ? (DateTime.now().millisecondsSinceEpoch ~/ 100) % _spinnerFrames.length
         : 0;
 
     return AnimatedBuilder(
@@ -441,25 +459,24 @@ class _ThinkingSectionState extends State<_ThinkingSection>
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     colors: [
-                      widget.colors.primary.withValues(alpha: glowAlpha),
-                      widget.colors.primary
-                          .withValues(alpha: glowAlpha * 0.3),
+                      widget.colors.primary.withOpacity(glowAlpha),
+                      widget.colors.primary.withOpacity(glowAlpha * 0.3),
                     ],
                     begin: Alignment.centerLeft,
                     end: Alignment.centerRight,
                   ),
                   border: Border(
                     bottom: BorderSide(
-                      color: widget.colors.primary.withValues(
-                        alpha: widget.isStreaming
+                      color: widget.colors.primary.withOpacity(
+                        widget.isStreaming
                             ? math.min(0.6, glowAlpha + 0.2)
                             : 0.2,
                       ),
                       width: widget.isStreaming ? 1.0 : 0.5,
                     ),
                     left: BorderSide(
-                      color: widget.colors.primary.withValues(
-                        alpha: widget.isStreaming ? 0.8 : 0.3,
+                      color: widget.colors.primary.withOpacity(
+                        widget.isStreaming ? 0.8 : 0.3,
                       ),
                       width: 2,
                     ),
@@ -468,7 +485,7 @@ class _ThinkingSectionState extends State<_ThinkingSection>
                       ? [
                           BoxShadow(
                             color: widget.colors.primary
-                                .withValues(alpha: glowAlpha * 0.5),
+                                .withOpacity(glowAlpha * 0.5),
                             blurRadius: 8,
                             spreadRadius: 0,
                           ),
@@ -515,8 +532,7 @@ class _ThinkingSectionState extends State<_ThinkingSection>
                       Text(
                         '[TAP]',
                         style: widget.mono.copyWith(
-                          color: widget.colors.primaryDim
-                              .withValues(alpha: 0.5),
+                          color: widget.colors.primaryDim.withOpacity(0.5),
                           fontSize: 8,
                           fontWeight: FontWeight.bold,
                         ),
@@ -539,7 +555,7 @@ class _ThinkingSectionState extends State<_ThinkingSection>
                 width: double.infinity,
                 constraints: const BoxConstraints(maxHeight: 300),
                 padding: const EdgeInsets.all(10),
-                color: widget.colors.primary.withValues(alpha: 0.05),
+                color: widget.colors.primary.withOpacity(0.05),
                 child: SingleChildScrollView(
                   reverse: true,
                   child: SelectableText(
@@ -611,7 +627,7 @@ class _SourceCitations extends StatelessWidget {
         border: Border(
           top: BorderSide(color: colors.border, width: 0.5),
         ),
-        color: colors.primary.withValues(alpha: 0.03),
+        color: colors.primary.withOpacity(0.03),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -639,7 +655,7 @@ class _SourceCitations extends StatelessWidget {
                     color: colors.accent,
                     fontSize: 10,
                     decoration: TextDecoration.underline,
-                    decorationColor: colors.accent.withValues(alpha: 0.5),
+                    decorationColor: colors.accent.withOpacity(0.5),
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
@@ -655,7 +671,8 @@ class _SourceCitations extends StatelessWidget {
   String _shortenUrl(String url) {
     try {
       final uri = Uri.parse(url);
-      final path = uri.path.length > 40 ? '${uri.path.substring(0, 40)}...' : uri.path;
+      final path =
+          uri.path.length > 40 ? '${uri.path.substring(0, 40)}...' : uri.path;
       return '${uri.host}$path';
     } catch (_) {
       return url.length > 60 ? '${url.substring(0, 60)}...' : url;
@@ -696,28 +713,33 @@ class _SafeMarkdown extends StatelessWidget {
         data: data,
         selectable: true,
         config: MarkdownConfig(configs: [
-          PConfig(textStyle: mono.copyWith(
+          PConfig(
+              textStyle: mono.copyWith(
             color: colors.textColor,
             fontSize: 13,
             height: 1.5,
           )),
-          CodeConfig(style: mono.copyWith(
+          CodeConfig(
+              style: mono.copyWith(
             color: colors.accent,
             fontSize: 12,
             backgroundColor: colors.surface,
           )),
           terminalPreConfig(colors),
-          H1Config(style: mono.copyWith(
+          H1Config(
+              style: mono.copyWith(
             color: colors.primary,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           )),
-          H2Config(style: mono.copyWith(
+          H2Config(
+              style: mono.copyWith(
             color: colors.primary,
             fontSize: 16,
             fontWeight: FontWeight.bold,
           )),
-          H3Config(style: mono.copyWith(
+          H3Config(
+              style: mono.copyWith(
             color: colors.primary,
             fontSize: 14,
             fontWeight: FontWeight.bold,

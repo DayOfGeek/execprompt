@@ -124,7 +124,7 @@ class ToolSettingsPanel extends ConsumerWidget {
         if (webSearchEnabled) ...[
           Container(
             height: 1,
-            color: colors.border.withValues(alpha: 0.3),
+            color: colors.border.withOpacity(0.3),
             margin: const EdgeInsets.symmetric(horizontal: 16),
           ),
 
@@ -205,7 +205,7 @@ class ToolSettingsPanel extends ConsumerWidget {
                 activeTrackColor: colors.primary,
                 inactiveTrackColor: colors.border,
                 thumbColor: colors.primary,
-                overlayColor: colors.primary.withValues(alpha: 0.1),
+                overlayColor: colors.primary.withOpacity(0.1),
                 trackHeight: 2,
                 thumbShape:
                     const RoundSliderThumbShape(enabledThumbRadius: 6),
@@ -324,10 +324,10 @@ class _ToolToggleRow extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: statusColor.withValues(alpha: 0.5),
+                  color: statusColor.withOpacity(0.5),
                 ),
                 color: isEnabled
-                    ? statusColor.withValues(alpha: 0.1)
+                    ? statusColor.withOpacity(0.1)
                     : null,
               ),
               child: Text(

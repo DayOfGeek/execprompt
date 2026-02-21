@@ -259,7 +259,7 @@ class _MultiModelPickerState extends ConsumerState<_MultiModelPicker> {
                       padding: const EdgeInsets.symmetric(
                           horizontal: 16, vertical: 10),
                       color: isSelected
-                          ? colors.primary.withValues(alpha: 0.1)
+                          ? colors.primary.withOpacity(0.1)
                           : null,
                       child: Row(
                         children: [
@@ -358,7 +358,7 @@ class _ModelTile extends StatelessWidget {
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-        color: isSelected ? colors.primary.withValues(alpha: 0.1) : null,
+        color: isSelected ? colors.primary.withOpacity(0.1) : null,
         child: Row(
           children: [
             Text(

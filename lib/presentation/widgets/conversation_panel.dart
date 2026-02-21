@@ -449,7 +449,7 @@ class _PanelConversationTile extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        color: isActive ? colors.primary.withValues(alpha: 0.1) : null,
+        color: isActive ? colors.primary.withOpacity(0.1) : null,
         child: Row(
           children: [
             Text(
@@ -519,7 +519,7 @@ class _PanelTileContent extends ConsumerWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: mono.copyWith(
-                        color: colors.accent.withValues(alpha: 0.7),
+                        color: colors.accent.withOpacity(0.7),
                         fontSize: 10,
                         fontStyle: FontStyle.italic,
                       ),

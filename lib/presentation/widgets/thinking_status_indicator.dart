@@ -99,9 +99,9 @@ class _ThinkingStatusIndicatorState
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 3),
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(color: colors.primary.withValues(alpha: 0.25)),
+          top: BorderSide(color: colors.primary.withOpacity(0.25)),
         ),
-        color: colors.primary.withValues(alpha: 0.04),
+        color: colors.primary.withOpacity(0.04),
       ),
       child: Row(
         children: [
@@ -113,7 +113,7 @@ class _ThinkingStatusIndicatorState
           Text(
             _buildWave(),
             style: mono.copyWith(
-              color: colors.primary.withValues(alpha: 0.35),
+              color: colors.primary.withOpacity(0.35),
               fontSize: 7,
             ),
           ),
@@ -131,7 +131,7 @@ class _ThinkingStatusIndicatorState
           Text(
             '0x${_buildHex()}',
             style: mono.copyWith(
-              color: colors.primaryDim.withValues(alpha: 0.4),
+              color: colors.primaryDim.withOpacity(0.4),
               fontSize: 8,
             ),
           ),

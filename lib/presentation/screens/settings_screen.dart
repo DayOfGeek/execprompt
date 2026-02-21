@@ -114,7 +114,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                     decoration: BoxDecoration(
-                      color: isSelected ? colors.primary.withValues(alpha: 0.1) : null,
+                      color: isSelected ? colors.primary.withOpacity(0.1) : null,
                       border: Border(bottom: BorderSide(color: colors.border, width: 0.5)),
                     ),
                     child: Row(
@@ -263,7 +263,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                           activeTrackColor: colors.primary,
                           inactiveTrackColor: colors.border,
                           thumbColor: colors.primary,
-                          overlayColor: colors.primary.withValues(alpha: 0.15),
+                          overlayColor: colors.primary.withOpacity(0.15),
                           trackHeight: 2,
                           thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
                         ),

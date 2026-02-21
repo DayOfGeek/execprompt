@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -157,7 +156,13 @@ class _AdaptiveShellState extends ConsumerState<AdaptiveShell> {
     });
 
     final chatArea = _buildChatArea(
-      context, chatState, selectedModel, colors, mono, sizes, tier,
+      context,
+      chatState,
+      selectedModel,
+      colors,
+      mono,
+      sizes,
+      tier,
     );
 
     Widget body;
@@ -210,7 +215,8 @@ class _AdaptiveShellState extends ConsumerState<AdaptiveShell> {
       drawer: tier.showSidebar ? null : const _PhoneDrawerWrapper(),
       // Detail drawer on the right — shown on tiers without the persistent detail panel
       endDrawer: tier.showDetailPanel ? null : const MobileDetailDrawer(),
-      appBar: _buildAppBar(context, chatState, selectedModel, colors, mono, tier),
+      appBar:
+          _buildAppBar(context, chatState, selectedModel, colors, mono, tier),
       body: Stack(
         children: [
           Column(
@@ -219,138 +225,29 @@ class _AdaptiveShellState extends ConsumerState<AdaptiveShell> {
               if (selectedModel == null)
                 Container(
                   width: double.infinity,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
                     border: Border(
-                      bottom: BorderSide(color: colors.error.withValues(alpha: 0.3)),
+                      top: BorderSide(color: colors.error.withOpacity(0.3)),
                     ),
-                    color: colors.error.withValues(alpha: 0.1),
-                  ),
-                  child: Row(
-                    children: [
-                      Text('! ',
-                          style: mono.copyWith(
-                              color: colors.error,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold)),
-                      Expanded(
-                        child: Text(
-                          'No model selected',
-                          style: mono.copyWith(color: colors.error, fontSize: 12),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () => context.push('/models'),
-                        child: Text(
-                          '[SELECT]',
-                          style: mono.copyWith(
-                            color: colors.error,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-
-              // Chat content
-              Expanded(
-                child: chatState.messages.isEmpty && !chatState.isLoading
-                    ? PromptSuggestions(
-                        selectedModel: ref.watch(selectedModelDisplayProvider),
-                        isServerConfigured: ref.watch(isServerConfiguredProvider),
-                        onPromptTap: _fillPrompt,
-                      )
-                    : Align(
-                        alignment: Alignment.topCenter,
-                        child: ConstrainedBox(
-                          constraints: BoxConstraints(
-                            maxWidth: _detailPanelCollapsed
-                                ? (sizes.chatMaxWidth != null ? sizes.chatMaxWidth! + sizes.detailPanelWidth : double.infinity)
-                                : (sizes.chatMaxWidth ?? double.infinity),
-                          ),
-                          child: ListView.builder(
-                            controller: _scrollController,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: sizes.contentPadding,
-                              vertical: 8,
-                            ),
-                            itemCount: chatState.messages.length +
-                                (chatState.isLoading ? 1 : 0),
-                            itemBuilder: (context, index) {
-                              if (index == chatState.messages.length &&
-                                  chatState.isLoading) {
-                                return MessageBubble(
-                                  role: 'assistant',
-                                  content: chatState.currentStreamingContent,
-                                  thinking: chatState.currentStreamingThinking,
-                                  isStreaming: true,
-                                );
-                              }
-
-                              final message = chatState.messages[index];
-                              final isLastAssistant =
-                                  message.message.role == 'assistant' &&
-                                      index == chatState.messages.length - 1;
-                              final isUser = message.message.role == 'user';
-
-                              return MessageBubble(
-                                key: ValueKey(message.id),
-                                role: message.message.role,
-                                content: message.message.content,
-                                thinking: message.message.thinking,
-                                timestamp: message.timestamp,
-                                images: message.message.images,
-                                isError: message.isError,
-                                onEdit: isUser && !chatState.isLoading
-                                    ? () => _handleEdit(message.id)
-                                    : null,
-                                onFork: !chatState.isLoading
-                                    ? () => ref
-                                        .read(chatProvider.notifier)
-                                        .forkConversation(message.id)
-                                    : null,
-                                onRetry: isLastAssistant
-                                    ? () => ref
-                                        .read(chatProvider.notifier)
-                                        .retryLastMessage()
-                                    : null,
-                                onDelete: () => ref
-                                    .read(chatProvider.notifier)
-                                    .removeMessage(message.id),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-              ),
-
-              // Error bar
-              if (chatState.error != null)
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      top: BorderSide(color: colors.error.withValues(alpha: 0.3)),
-                    ),
-                    color: colors.error.withValues(alpha: 0.1),
+                    color: colors.error.withOpacity(0.1),
                   ),
                   child: Row(
                     children: [
                       Text('✕ ',
-                          style: mono.copyWith(color: colors.error, fontSize: 14)),
+                          style:
+                              mono.copyWith(color: colors.error, fontSize: 14)),
                       Expanded(
                         child: Text(
                           chatState.error!.userMessage,
-                          style: mono.copyWith(color: colors.error, fontSize: 11),
+                          style:
+                              mono.copyWith(color: colors.error, fontSize: 11),
                         ),
                       ),
                       InkWell(
-                        onTap: () => ref
-                            .read(chatProvider.notifier)
-                            .retryLastMessage(),
+                        onTap: () =>
+                            ref.read(chatProvider.notifier).retryLastMessage(),
                         child: Text(
                           '[RETRY]',
                           style: mono.copyWith(
@@ -465,12 +362,15 @@ class _AdaptiveShellState extends ConsumerState<AdaptiveShell> {
                   children: [
                     Flexible(
                       child: Text(
-                        ref.watch(selectedModelDisplayProvider) ?? selectedModel,
-                        style: mono.copyWith(color: colors.textDim, fontSize: 12),
+                        ref.watch(selectedModelDisplayProvider) ??
+                            selectedModel,
+                        style:
+                            mono.copyWith(color: colors.textDim, fontSize: 12),
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Icon(Icons.arrow_drop_down, size: 16, color: colors.textDim),
+                    Icon(Icons.arrow_drop_down,
+                        size: 16, color: colors.textDim),
                   ],
                 ),
               ),
@@ -519,7 +419,9 @@ class _AdaptiveShellState extends ConsumerState<AdaptiveShell> {
             onPressed: () {
               setState(() => _detailPanelCollapsed = !_detailPanelCollapsed);
             },
-            tooltip: _detailPanelCollapsed ? 'Show detail panel' : 'Hide detail panel',
+            tooltip: _detailPanelCollapsed
+                ? 'Show detail panel'
+                : 'Hide detail panel',
           ),
       ],
     );
@@ -591,7 +493,8 @@ class _PhoneDrawerState extends ConsumerState<_PhoneDrawer> {
               },
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 child: Row(
                   children: [
                     Text(
@@ -625,12 +528,15 @@ class _PhoneDrawerState extends ConsumerState<_PhoneDrawer> {
                 decoration: InputDecoration(
                   hintText: '/ search...',
                   hintStyle: mono.copyWith(color: colors.textDim, fontSize: 12),
-                  prefixIcon: Icon(Icons.search, size: 16, color: colors.textDim),
+                  prefixIcon:
+                      Icon(Icons.search, size: 16, color: colors.textDim),
                   isDense: true,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                 ),
                 onChanged: (value) {
-                  ref.read(conversationSearchQueryProvider.notifier).state = value;
+                  ref.read(conversationSearchQueryProvider.notifier).state =
+                      value;
                 },
               ),
             ),
@@ -645,7 +551,8 @@ class _PhoneDrawerState extends ConsumerState<_PhoneDrawer> {
                         _searchController.text.isNotEmpty
                             ? '> No results'
                             : '> No conversations yet',
-                        style: mono.copyWith(color: colors.textDim, fontSize: 12),
+                        style:
+                            mono.copyWith(color: colors.textDim, fontSize: 12),
                       ),
                     );
                   }
@@ -675,7 +582,9 @@ class _PhoneDrawerState extends ConsumerState<_PhoneDrawer> {
                             mono: mono,
                             onTap: () {
                               HapticFeedback.selectionClick();
-                              ref.read(chatProvider.notifier).loadConversation(convo.id);
+                              ref
+                                  .read(chatProvider.notifier)
+                                  .loadConversation(convo.id);
                               Navigator.pop(context);
                             },
                             onDelete: () => _confirmDelete(context, convo),
@@ -687,10 +596,13 @@ class _PhoneDrawerState extends ConsumerState<_PhoneDrawer> {
                   );
                 },
                 loading: () => Center(
-                  child: Text('> Loading...', style: mono.copyWith(color: colors.textDim, fontSize: 12)),
+                  child: Text('> Loading...',
+                      style:
+                          mono.copyWith(color: colors.textDim, fontSize: 12)),
                 ),
                 error: (e, _) => Center(
-                  child: Text('> Error: $e', style: mono.copyWith(color: colors.error, fontSize: 12)),
+                  child: Text('> Error: $e',
+                      style: mono.copyWith(color: colors.error, fontSize: 12)),
                 ),
               ),
             ),
@@ -704,12 +616,15 @@ class _PhoneDrawerState extends ConsumerState<_PhoneDrawer> {
                 context.push('/models');
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 child: Row(
                   children: [
                     Icon(Icons.storage, size: 16, color: colors.primaryDim),
                     const SizedBox(width: 8),
-                    Text('Models', style: mono.copyWith(color: colors.textDim, fontSize: 12)),
+                    Text('Models',
+                        style:
+                            mono.copyWith(color: colors.textDim, fontSize: 12)),
                   ],
                 ),
               ),
@@ -720,12 +635,15 @@ class _PhoneDrawerState extends ConsumerState<_PhoneDrawer> {
                 context.push('/settings');
               },
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 child: Row(
                   children: [
                     Icon(Icons.settings, size: 16, color: colors.primaryDim),
                     const SizedBox(width: 8),
-                    Text('Settings', style: mono.copyWith(color: colors.textDim, fontSize: 12)),
+                    Text('Settings',
+                        style:
+                            mono.copyWith(color: colors.textDim, fontSize: 12)),
                   ],
                 ),
               ),
@@ -737,7 +655,8 @@ class _PhoneDrawerState extends ConsumerState<_PhoneDrawer> {
     );
   }
 
-  Map<String, List<Conversation>> _groupByDate(List<Conversation> conversations) {
+  Map<String, List<Conversation>> _groupByDate(
+      List<Conversation> conversations) {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     final yesterday = today.subtract(const Duration(days: 1));
@@ -746,7 +665,8 @@ class _PhoneDrawerState extends ConsumerState<_PhoneDrawer> {
 
     final Map<String, List<Conversation>> groups = {};
     for (final convo in conversations) {
-      final date = DateTime(convo.updatedAt.year, convo.updatedAt.month, convo.updatedAt.day);
+      final date = DateTime(
+          convo.updatedAt.year, convo.updatedAt.month, convo.updatedAt.day);
       String key;
       if (date == today) {
         key = 'Today';
@@ -810,7 +730,9 @@ class _PhoneDrawerState extends ConsumerState<_PhoneDrawer> {
             onPressed: () {
               final newTitle = controller.text.trim();
               if (newTitle.isNotEmpty) {
-                ref.read(chatProvider.notifier).renameConversation(convo.id, newTitle);
+                ref
+                    .read(chatProvider.notifier)
+                    .renameConversation(convo.id, newTitle);
               }
               Navigator.pop(ctx);
             },
@@ -876,7 +798,7 @@ class _DrawerConversationTile extends StatelessWidget {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        color: isActive ? colors.primary.withValues(alpha: 0.1) : null,
+        color: isActive ? colors.primary.withOpacity(0.1) : null,
         child: Row(
           children: [
             Text(
@@ -897,7 +819,8 @@ class _DrawerConversationTile extends StatelessWidget {
                     style: mono.copyWith(
                       color: isActive ? colors.primary : colors.textColor,
                       fontSize: 12,
-                      fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+                      fontWeight:
+                          isActive ? FontWeight.bold : FontWeight.normal,
                     ),
                   ),
                   const SizedBox(height: 2),

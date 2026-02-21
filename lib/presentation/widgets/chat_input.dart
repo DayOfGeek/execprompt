@@ -291,7 +291,7 @@ class _ChatInputState extends State<ChatInput> {
                       ),
                       disabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.zero,
-                        borderSide: BorderSide(color: colors.border.withValues(alpha: 0.3)),
+                        borderSide: BorderSide(color: colors.border.withOpacity(0.3)),
                       ),
                       contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                       isDense: true,
@@ -314,7 +314,7 @@ class _ChatInputState extends State<ChatInput> {
                       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
                       decoration: BoxDecoration(
                         border: Border.all(color: colors.error),
-                        color: colors.error.withValues(alpha: 0.1),
+                        color: colors.error.withOpacity(0.1),
                       ),
                       child: Text(
                         'STOP',
@@ -335,7 +335,7 @@ class _ChatInputState extends State<ChatInput> {
                         border: Border.all(
                           color: _canSend ? colors.primary : colors.border,
                         ),
-                        color: _canSend ? colors.primary.withValues(alpha: 0.1) : null,
+                        color: _canSend ? colors.primary.withOpacity(0.1) : null,
                       ),
                       child: Text(
                         '[↵]',

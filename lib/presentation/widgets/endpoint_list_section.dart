@@ -141,7 +141,7 @@ class _EndpointTile extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: endpoint.isActive
-              ? colors.primary.withValues(alpha: 0.05)
+              ? colors.primary.withOpacity(0.05)
               : null,
           border: isLast
               ? null

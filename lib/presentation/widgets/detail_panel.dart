@@ -451,7 +451,7 @@ class _ParamSlider extends StatelessWidget {
                 activeTrackColor: colors.primary,
                 inactiveTrackColor: colors.border,
                 thumbColor: colors.primary,
-                overlayColor: colors.primary.withValues(alpha: 0.12),
+                overlayColor: colors.primary.withOpacity(0.12),
                 trackHeight: 2.0,
                 thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 5),
                 overlayShape: const RoundSliderOverlayShape(overlayRadius: 12),

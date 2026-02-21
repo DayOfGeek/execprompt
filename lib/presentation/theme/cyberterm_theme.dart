@@ -312,7 +312,7 @@ ThemeData buildCyberTermTheme(CyberTermTheme theme) {
       activeTrackColor: colors.primary,
       inactiveTrackColor: colors.border,
       thumbColor: colors.primary,
-      overlayColor: colors.primary.withValues(alpha: 0.2),
+      overlayColor: colors.primary.withOpacity(0.2),
       valueIndicatorColor: colors.primary,
       valueIndicatorTextStyle: GoogleFonts.jetBrainsMono(
         color: colors.background,

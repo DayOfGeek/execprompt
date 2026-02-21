@@ -184,7 +184,7 @@ class ModelsScreen extends ConsumerWidget {
                   const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(
                 border: Border.all(color: colors.primary),
-                color: colors.primary.withValues(alpha: 0.1),
+                color: colors.primary.withOpacity(0.1),
               ),
               child: Text(
                 '[SETTINGS]',
@@ -384,7 +384,7 @@ class ModelsScreen extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         decoration: BoxDecoration(
           color: isSelected
-              ? colors.primary.withValues(alpha: 0.1)
+              ? colors.primary.withOpacity(0.1)
               : colors.surface,
           border: Border.all(
             color: isSelected ? colors.primary : colors.border,

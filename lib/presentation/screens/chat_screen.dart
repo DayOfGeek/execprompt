@@ -181,8 +181,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(
-                            color: colors.error.withValues(alpha: 0.3))),
-                    color: colors.error.withValues(alpha: 0.1),
+                            color: colors.error.withOpacity(0.3))),
+                    color: colors.error.withOpacity(0.1),
                   ),
                   child: Row(
                     children: [
@@ -280,8 +280,8 @@ class _ChatScreenState extends ConsumerState<ChatScreen> {
                   decoration: BoxDecoration(
                     border: Border(
                         top: BorderSide(
-                            color: colors.error.withValues(alpha: 0.3))),
-                    color: colors.error.withValues(alpha: 0.1),
+                            color: colors.error.withOpacity(0.3))),
+                    color: colors.error.withOpacity(0.1),
                   ),
                   child: Row(
                     children: [

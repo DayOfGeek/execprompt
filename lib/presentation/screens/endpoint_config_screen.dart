@@ -387,7 +387,7 @@ class _EndpointConfigScreenState extends ConsumerState<EndpointConfigScreen> {
                         horizontal: 12, vertical: 10),
                     decoration: BoxDecoration(
                       color: isSelected
-                          ? colors.primary.withValues(alpha: 0.1)
+                          ? colors.primary.withOpacity(0.1)
                           : null,
                       border: type != EndpointType.values.last
                           ? Border(
@@ -799,7 +799,7 @@ class _EndpointConfigScreenState extends ConsumerState<EndpointConfigScreen> {
                 const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             decoration: BoxDecoration(
               color: isSelected
-                  ? colors.primary.withValues(alpha: 0.08)
+                  ? colors.primary.withOpacity(0.08)
                   : null,
               border: Border(
                 top: BorderSide(color: colors.border, width: 0.5),

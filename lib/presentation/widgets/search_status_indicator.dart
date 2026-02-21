@@ -14,7 +14,6 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -42,9 +41,9 @@ class SearchStatusIndicator extends ConsumerWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(color: colors.primary.withValues(alpha: 0.2)),
+          top: BorderSide(color: colors.primary.withOpacity(0.2)),
         ),
-        color: colors.primary.withValues(alpha: 0.05),
+        color: colors.primary.withOpacity(0.05),
       ),
       child: Row(
         children: [
@@ -103,7 +102,7 @@ class _PulsingDotState extends State<_PulsingDot>
           height: 6,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: widget.color.withValues(alpha: 0.3 + _controller.value * 0.7),
+            color: widget.color.withOpacity(0.3 + _controller.value * 0.7),
           ),
         );
       },
