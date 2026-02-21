@@ -220,7 +220,7 @@ ThemeData buildCyberTermTheme(CyberTermTheme theme) {
     ),
 
     // Cards — sharp corners, bordered
-    cardTheme: CardThemeData(
+    cardTheme: CardTheme(
       color: colors.surface,
       elevation: 0,
       shape: RoundedRectangleBorder(
@@ -254,7 +254,7 @@ ThemeData buildCyberTermTheme(CyberTermTheme theme) {
     ),
 
     // Dialogs
-    dialogTheme: DialogThemeData(
+    dialogTheme: DialogTheme(
       backgroundColor: colors.surface,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.zero,
