@@ -29,9 +29,7 @@ import '../widgets/conversation_panel.dart';
 import '../widgets/detail_panel.dart';
 import '../widgets/mobile_detail_drawer.dart';
 import '../widgets/model_picker.dart';
-import '../widgets/message_bubble.dart';
 import '../widgets/chat_input.dart';
-import '../widgets/prompt_suggestions.dart';
 import '../widgets/search_status_indicator.dart';
 import '../widgets/thinking_status_indicator.dart';
 import '../../data/models/ollama_error.dart';
@@ -89,21 +87,6 @@ class _AdaptiveShellState extends ConsumerState<AdaptiveShell> {
         );
       }
     });
-  }
-
-  void _fillPrompt(String prompt) {
-    ref.read(chatProvider.notifier).sendMessage(prompt);
-  }
-
-  void _handleEdit(String messageId) {
-    final content = ref.read(chatProvider.notifier).editMessageAt(messageId);
-    if (content != null && content.isNotEmpty) {
-      HapticFeedback.lightImpact();
-      _inputController.text = content;
-      _inputController.selection = TextSelection.fromPosition(
-        TextPosition(offset: content.length),
-      );
-    }
   }
 
   KeyEventResult _handleKeyEvent(FocusNode node, KeyEvent event) {
